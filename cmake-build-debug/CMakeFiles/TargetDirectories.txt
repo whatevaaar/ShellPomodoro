@@ -1,0 +1,3 @@
+/home/nexus/CLionProjects/Pomodoro/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/nexus/CLionProjects/Pomodoro/cmake-build-debug/CMakeFiles/Pomodoro.dir
+/home/nexus/CLionProjects/Pomodoro/cmake-build-debug/CMakeFiles/edit_cache.dir
