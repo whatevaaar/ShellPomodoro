@@ -6,9 +6,10 @@
 #define DESCANSO_MINUTOS 5
 #define DESCANSO_LARGO_MINUTOS 5
 
-void pomodoro(int pomodorosCompletados);
+void pomodoro(int* pomodorosCompletados);
 void breakCorto();
-void alarma();
+void alarmaPomodoro();
+void alarmaBreak();
 void breakLargo();
 
 int main() {
@@ -16,47 +17,56 @@ int main() {
         printf("Empezar\n");
         getchar();
         for (;;){
-            pomodoro(pomodorosCompletados);
-            printf("¿Empezar descanso?");
-            getchar();
-            if(pomodorosCompletados % 4 == 0){
+
+            pomodoro(&pomodorosCompletados);
+            if(pomodorosCompletados != 0 && pomodorosCompletados % 4 == 0){
                 printf("¿Empezar descanso largo?");
                 getchar();
-                breakLargo(pomodorosCompletados);
+                breakLargo();
                 continue;
             }
 
-            breakCorto(pomodorosCompletados);
+            printf("¿Empezar descanso?");
+            getchar();
+getchar();
+            breakCorto();
 
         }
     return 0;
 }
 
-void pomodoro(int pomodorosCompletados){
-    printf("Streak: %d\n" ,pomodorosCompletados);
+void pomodoro(int * pomodorosCompletados){
+    printf("Streak: %d\nTrabajando\n" ,*pomodorosCompletados);
     for (int i = 0; i < SESION_MINUTOS; i++) {
         sleep(60);
-        pomodorosCompletados += 1;
     }
-    alarma();
+
+    (*pomodorosCompletados)++ ;
+    alarmaPomodoro();
 }
 
 void breakCorto(){
-    printf("Descano\n");
+    printf("Descansando\n");
     for (int i = 0; i < DESCANSO_LARGO_MINUTOS; i++)
         sleep(60);
-    alarma();
+    alarmaPomodoro();
 }
+
 
 
 void breakLargo(){
-    printf("Descano Largo\n");
+    printf("Descanso Largo\n");
     for (int i = 0; i < DESCANSO_MINUTOS; i++)
         sleep(60);
-    alarma();
+    alarmaBreak();
 }
 
-void alarma(){
+void alarmaPomodoro(){
     FILE *terminal;
-    terminal = popen("zenity --info --text=\"Pomodor Completo\"","w");
+    terminal = popen("zenity --info --text=\"Pomodoro Completo\"","w");
     }
+
+    void alarmaBreak(){
+    FILE *terminal;
+    terminal = popen("zenity --info --text=\"Fin de descanso\"","w");
+}
