@@ -11,28 +11,38 @@ void breakCorto();
 void alarmaPomodoro();
 void alarmaBreak();
 void breakLargo();
-
+void resumirTrasPopup();
+int esMultiploDeCuatro(int pomodorosCompletados);
 int main() {
         int pomodorosCompletados = 0;
         printf("Empezar\n");
         getchar();
         for (;;){
-
             pomodoro(&pomodorosCompletados);
-            if(pomodorosCompletados != 0 && pomodorosCompletados % 4 == 0){
+            resumirTrasPopup();
+            if(esMultiploDeCuatro(pomodorosCompletados)){
                 printf("¿Empezar descanso largo?");
-                getchar();
+                resumirTrasPopup();
                 breakLargo();
                 continue;
             }
 
             printf("¿Empezar descanso?");
-            getchar();
-getchar();
+            resumirTrasPopup();
             breakCorto();
-
+            resumirTrasPopup();
         }
     return 0;
+}
+
+int esMultiploDeCuatro(int pomodorosCompletados){
+    return pomodorosCompletados != 0 && pomodorosCompletados % 4 == 0;
+}
+
+void resumirTrasPopup(){
+    getchar();
+    getchar();
+    return;
 }
 
 void pomodoro(int * pomodorosCompletados){
@@ -49,7 +59,7 @@ void breakCorto(){
     printf("Descansando\n");
     for (int i = 0; i < DESCANSO_LARGO_MINUTOS; i++)
         sleep(60);
-    alarmaPomodoro();
+    alarmaBreak();
 }
 
 
