@@ -4,7 +4,7 @@
 
 #define SESION_MINUTOS 25
 #define DESCANSO_MINUTOS 5
-#define DESCANSO_LARGO_MINUTOS 5
+#define DESCANSO_LARGO_MINUTOS 15
 
 void pomodoro(int* pomodorosCompletados);
 void breakCorto();
@@ -24,6 +24,7 @@ int main() {
                 printf("¿Empezar descanso largo?");
                 resumirTrasPopup();
                 breakLargo();
+                resumirTrasPopup();
                 continue;
             }
 
@@ -46,7 +47,7 @@ void resumirTrasPopup(){
 }
 
 void pomodoro(int * pomodorosCompletados){
-    printf("Streak: %d\nTrabajando\n" ,*pomodorosCompletados);
+    printf("Streak: %d\nTrabajando\n" ,(*pomodorosCompletados) + 1);
     for (int i = 0; i < SESION_MINUTOS; i++) {
         sleep(60);
     }
@@ -57,7 +58,7 @@ void pomodoro(int * pomodorosCompletados){
 
 void breakCorto(){
     printf("Descansando\n");
-    for (int i = 0; i < DESCANSO_LARGO_MINUTOS; i++)
+    for (int i = 0; i < DESCANSO_MINUTOS; i++)
         sleep(60);
     alarmaBreak();
 }
@@ -66,7 +67,7 @@ void breakCorto(){
 
 void breakLargo(){
     printf("Descanso Largo\n");
-    for (int i = 0; i < DESCANSO_MINUTOS; i++)
+    for (int i = 0; i < DESCANSO_LARGO_MINUTOS; i++)
         sleep(60);
     alarmaBreak();
 }
